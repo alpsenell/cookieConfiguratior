@@ -10,28 +10,35 @@
       :key="option.text"
       class="mt-1"
       :checked="option.checked"
+      @click.native="toggleConsent(option)"
     >
-      <p class="mr-4">{{ option.text }}</p>
+      <p class="mr-4">
+        {{ option.text }}
+      </p>
     </BaseToggleSwitch>
   </div>
 </template>
 
 <script>
-import BaseHeader from "@/components/atoms/BaseHeader";
-import BaseToggleSwitch from "@/components/atoms/BaseToggleSwitch";
+import BaseHeader from '@/components/atoms/BaseHeader';
+import BaseToggleSwitch from '@/components/atoms/BaseToggleSwitch';
 
 export default {
   components: {
     BaseHeader,
-    BaseToggleSwitch
+    BaseToggleSwitch,
   },
-  data () {
+  data() {
     return {
-      legislationOptions: [
-        { text: 'Consent by scroll ', checked: false },
-        { text: 'Per purpose consent', checked: false },
-      ]
-    }
-  }
-}
+      legislationOptions: [{ text: 'Consent by scroll', value: 'consentByScroll', checked: false }, { text: 'Per purpose consent', value: 'perPurposeConsent', checked: false }],
+    };
+  },
+  methods: {
+    toggleConsent(option) {
+      option.checked = !option.checked;
+
+      this.$emit('consent', { key: option.value, value: option.checked });
+    },
+  },
+};
 </script>

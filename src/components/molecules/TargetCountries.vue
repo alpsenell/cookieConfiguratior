@@ -13,27 +13,39 @@
       <BaseRadioButton
         :label="option.text"
         :checked="option.checked"
+        @click.native="setCountryOption(option)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import BaseHeader from "@/components/atoms/BaseHeader";
-import BaseRadioButton from "@/components/atoms/BaseRadioButton";
+import BaseHeader from '@/components/atoms/BaseHeader';
+import BaseRadioButton from '@/components/atoms/BaseRadioButton';
 export default {
   components: {
     BaseRadioButton,
-    BaseHeader
+    BaseHeader,
   },
-  data () {
+  data() {
     return {
       countryOptions: [
         { text: 'Worldwide', checked: false, value: 'world' },
         { text: 'US users only', checked: false, value: 'US' },
-        { text: 'EU users only', checked: false, value: 'EU' },
-      ]
-    }
-  }
-}
+        { text: 'EU users only', checked: true, value: 'EU' },
+      ],
+    };
+  },
+  methods: {
+    setCountryOption(option) {
+      this.countryOptions.forEach((item) => {
+        item.checked = false;
+      });
+
+      option.checked = true;
+
+      this.$emit('targetCountry', option.value);
+    },
+  },
+};
 </script>

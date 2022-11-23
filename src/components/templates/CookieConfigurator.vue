@@ -7,38 +7,105 @@
       />
     </div>
     <div class="cookie-configurator__content grid">
-      <div class="flex flex-col gap-8">
-        <TargetCountries />
-        <Legislation />
-        <Consent />
+      <div class="flex flex-col gap-8 border-r-2 pr-8">
+        <TargetCountries
+          @targetCountry="value => $emit('targetCountry', value)"
+        />
+        <Legislation
+          @legislation="value => $emit('legislation', value)"
+        />
+        <Consent
+          @consent="value => $emit('consent', value)"
+        />
+        <BannerConfiguration
+          @bannerConfig="value => $emit('bannerConfig', value)"
+          @updateTitle="value => $emit('updateTitle', value)"
+        />
       </div>
-      <div>alp</div>
+      <div class="pl-8">
+        <CookieOutput
+          :accept-button-status="acceptButtonStatus"
+          :reject-button-status="rejectButtonStatus"
+          :close-button-status="closeButtonStatus"
+          :title="cookieTitle"
+        />
+        <Message
+          v-if="warningMessage"
+          class="mt-4"
+          :message="warningMessage"
+        />
+      </div>
     </div>
-    <div class="cookie-configurator__footer">
-      Footer
+    <div class="flex justify-between items-center">
+      <a>Read the documentation</a>
+      <div>
+        <BaseButton
+          :disabled="!isDirty"
+          dark
+          text="Save"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import BaseHeader from "@/components/atoms/BaseHeader";
-import Consent from "@/components/molecules/Consent";
-import Legislation from "@/components/molecules/Legislation";
-import TargetCountries from "@/components/molecules/TargetCountries";
+import BaseHeader from '@/components/atoms/BaseHeader';
+import BaseButton from '@/components/atoms/BaseButton';
+import Consent from '@/components/molecules/Consent';
+import Legislation from '@/components/molecules/Legislation';
+import TargetCountries from '@/components/molecules/TargetCountries';
+import CookieOutput from '@/components/molecules/CookieOutput';
+import BannerConfiguration from '@/components/molecules/BannerConfiguration';
+import Message from '@/components/atoms/Message';
 
 export default {
   components: {
+    BaseButton,
+    Message,
+    BannerConfiguration,
+    CookieOutput,
     BaseHeader,
     Consent,
     Legislation,
-    TargetCountries
-  }
-}
+    TargetCountries,
+  },
+  props: {
+    targetCountries: {
+      type: String,
+      required: true,
+    },
+    cookieTitle: {
+      type: String,
+      required: true,
+    },
+    acceptButtonStatus: {
+      type: Boolean,
+      required: true,
+    },
+    rejectButtonStatus: {
+      type: Boolean,
+      required: true,
+    },
+    closeButtonStatus: {
+      type: Boolean,
+      required: true,
+    },
+    warningMessage: {
+      type: String,
+      required: true,
+    },
+    isDirty: {
+      type: Boolean,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 .cookie-configurator {
-  grid-template-rows: 70px minmax(400px, 700px) 70px;
+  grid-template-rows: 70px 900px 70px;
 
   &__content {
     grid-template-columns: 1fr 2fr;

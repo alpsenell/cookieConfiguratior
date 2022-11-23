@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <CookieConfigurator/>
+    <CookieConfigurator />
   </div>
 </template>
 
 <script>
-import CookieConfigurator from "@/components/pages/CookieConfigurator";
+import CookieConfigurator from '@/components/pages/CookieConfigurator';
 
 export default {
   name: 'App',
   components: {
-    CookieConfigurator
-  }
-}
+    CookieConfigurator,
+  },
+};
 </script>
 
 <style lang="scss">

@@ -12,32 +12,33 @@
       :checked="option.checked"
       @click.native="toggleLegislation(option)"
     >
-      <p class="mr-4">{{ option.text }}</p>
+      <p class="mr-4">
+        {{ option.text }}
+      </p>
     </BaseToggleSwitch>
   </div>
 </template>
 
 <script>
-import BaseHeader from "@/components/atoms/BaseHeader";
-import BaseToggleSwitch from "@/components/atoms/BaseToggleSwitch";
+import BaseHeader from '@/components/atoms/BaseHeader';
+import BaseToggleSwitch from '@/components/atoms/BaseToggleSwitch';
 
 export default {
   components: {
     BaseHeader,
-    BaseToggleSwitch
+    BaseToggleSwitch,
   },
-  data () {
+  data() {
     return {
-      legislationOptions: [
-        { text: 'GDRP', checked: false },
-        { text: 'CCPA', checked: false },
-      ]
-    }
+      legislationOptions: [{ text: 'GDRP', value: 'gdpr', checked: true }, { text: 'CCPA', value: 'ccpa', checked: false }],
+    };
   },
   methods: {
-    toggleLegislation (option) {
+    toggleLegislation(option) {
       option.checked = !option.checked;
-    }
-  }
-}
+
+      this.$emit('legislation', { key: option.value, value: option.checked });
+    },
+  },
+};
 </script>

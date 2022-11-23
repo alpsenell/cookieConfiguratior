@@ -6,7 +6,7 @@
         type="radio"
         name="radio"
         :checked="checked"
-      />
+      >
       <span class="py-1.5 pl-1.5 pr-3 flex items-center rounded-full duration-200 ease-in">{{ label }}</span>
     </label>
   </div>
@@ -17,14 +17,14 @@ export default {
   props: {
     checked: {
       type: Boolean,
-      default: false
+      default: false,
     },
     label: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
