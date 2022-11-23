@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind colors;
+
+:root {
+    @apply
+    text-base
+    leading-normal;
+
+    --transparent: transparent;
+    --brand: #244583;
+    --blue: #147CB6;
+    --cyan: #36D6D0;
+    --green: #9FEFDE;
+    --primary: #24C4A1;
+    --primary-mid-light: #54EAB4;
+    --primary-light: #9FEFDE;
+    --primary-lighter: #CFFAF0;
+    --primary-dark: #153954;
+    --primary-dark-tint-1: #194566;
+    --primary-dark-tint-2: #1D5077;
+    --primary-darker: #0D3049;
+    --dark: #13274B;
+    --darker: #1C273A;
+    --secondary: #FEBF2D;
+    --secondary-light: #FED19A;
+    --light: #FAF9F8;
+    --grey: #C1C1C1;
+    --grey-light: #EBECE9;
+    --grey-dark: #768E98;
+    --error: #FF7963;
+    --accent: #FF7963;
+    --accent-light: #EC988A;
+    --white: #FFF;
+    --black: #414042;
+    --tertiary-blue: #93CAF2;
+    --tertiary-yellow: #FFEE54;
+    --tertiary-pink: #F8B7FA;
+}
