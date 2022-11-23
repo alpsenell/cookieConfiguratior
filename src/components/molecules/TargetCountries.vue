@@ -8,32 +8,30 @@
     <div
       v-for="option in countryOptions"
       :key="option.value"
+      class="mt-2"
     >
-      <input
-        :name="option.value"
-        type="radio"
+      <BaseRadioButton
+        :label="option.text"
+        :checked="option.checked"
       />
-      <label
-        :id="option.value"
-        :for="option.value">
-        {{ option.text }}
-      </label>
     </div>
   </div>
 </template>
 
 <script>
 import BaseHeader from "@/components/atoms/BaseHeader";
+import BaseRadioButton from "@/components/atoms/BaseRadioButton";
 export default {
   components: {
+    BaseRadioButton,
     BaseHeader
   },
   data () {
     return {
       countryOptions: [
-        { text: 'Worldwide', value: 'world' },
-        { text: 'US users only', value: 'US' },
-        { text: 'EU users only', value: 'EU' },
+        { text: 'Worldwide', checked: false, value: 'world' },
+        { text: 'US users only', checked: false, value: 'US' },
+        { text: 'EU users only', checked: false, value: 'EU' },
       ]
     }
   }

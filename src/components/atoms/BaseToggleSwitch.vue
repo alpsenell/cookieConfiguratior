@@ -37,7 +37,7 @@ export default {
   }
   &__input:checked {
     ~ .toggle__dot {
-      background: var(--secondary);
+      background: var(--dark);
       transform: translateX(100%);
     }
     ~ .toggle__rail {

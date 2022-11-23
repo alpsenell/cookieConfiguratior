@@ -8,7 +8,9 @@
     <BaseToggleSwitch
       v-for="option in legislationOptions"
       :key="option.text"
+      class="mt-2"
       :checked="option.checked"
+      @click.native="toggleLegislation(option)"
     >
       <p class="mr-4">{{ option.text }}</p>
     </BaseToggleSwitch>
@@ -30,6 +32,11 @@ export default {
         { text: 'GDRP', checked: false },
         { text: 'CCPA', checked: false },
       ]
+    }
+  },
+  methods: {
+    toggleLegislation (option) {
+      option.checked = !option.checked;
     }
   }
 }

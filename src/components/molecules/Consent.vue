@@ -8,6 +8,7 @@
     <BaseToggleSwitch
       v-for="option in legislationOptions"
       :key="option.text"
+      class="mt-1"
       :checked="option.checked"
     >
       <p class="mr-4">{{ option.text }}</p>
