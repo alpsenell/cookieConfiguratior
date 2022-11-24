@@ -28,16 +28,15 @@ export default {
     BaseHeader,
     BaseToggleSwitch,
   },
-  data() {
-    return {
-      legislationOptions: [{ text: 'GDRP', value: 'gdpr', checked: true }, { text: 'CCPA', value: 'ccpa', checked: false }],
-    };
+  props: {
+    legislationOptions: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     toggleLegislation(option) {
-      option.checked = !option.checked;
-
-      this.$emit('legislation', { key: option.value, value: option.checked });
+      this.$emit('setLegislationOption', { key: option.value, value: !option.checked });
     },
   },
 };

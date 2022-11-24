@@ -1,7 +1,7 @@
 <template>
   <div class="bg-grey-light rounded-md p-4">
     <BaseToggleSwitch
-      v-for="option in config"
+      v-for="option in buttonsOptions"
       :key="option.text"
       class="mt-2"
       :checked="option.checked"
@@ -15,7 +15,7 @@
       <span class="mr-2">Title</span>
       <input
         class="mt-2 bg-transparent border-b border-black outline-0"
-        :value="title"
+        :value="cookieTitle"
         type="text"
         @input="updateTitle"
       >
@@ -30,27 +30,22 @@ export default {
   components: {
     BaseToggleSwitch,
   },
-  data() {
-    return {
-      config: [
-        { text: 'Accept Button Display', value: 'acceptButtonDisplay', checked: false },
-        { text: 'Reject Button Display', value: 'rejectButtonDisplay', checked: false },
-        { text: 'Close Button Display', value: 'closeButtonDisplay', checked: true },
-        { text: 'Close Button Rejects', value: 'closeButtonReject', checked: false },
-      ],
-      title: 'Notice',
-    };
+  props: {
+    buttonsOptions: {
+      type: Array,
+      required: true,
+    },
+    cookieTitle: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     toggleOption(option) {
-      option.checked = !option.checked;
-
-      this.$emit('bannerConfig', { key: option.value, value: option.checked });
+      this.$emit('setButtonOption', { key: option.value, value: !option.checked });
     },
     updateTitle(event) {
-      this.title = event.target.value;
-
-      this.$emit('updateTitle', { key: 'title', value: event.target.value });
+      this.$emit('setTitle', { key: 'title', value: event.target.value });
     },
   },
 };

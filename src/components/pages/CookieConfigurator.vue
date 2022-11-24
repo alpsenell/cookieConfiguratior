@@ -6,11 +6,16 @@
     :reject-button-status="banner.rejectButtonDisplay"
     :close-button-status="banner.closeButtonDisplay"
     :warning-message="warningMessage"
-    @targetCountry="setTargetCountry"
-    @legislation="setLegislation"
-    @bannerConfig="setBannerConfig"
-    @updateTitle="setBannerConfig"
-    @consent="setConsent"
+    :country-options="countryOptions"
+    :legislation-options="legislationOptions"
+    :consent-options="consentOptions"
+    :buttons-options="buttonsOptions"
+    :is-dirty="isDirty"
+    @setTargetCountry="setTargetCountry"
+    @setLegislationOption="setLegislation"
+    @setButtonOption="setBannerConfig"
+    @setTitle="setBannerConfig"
+    @setConsentOption="setConsent"
     @reset="reset"
   />
 </template>
@@ -23,17 +28,15 @@ export default {
   components: {
     CookieConfigurator,
   },
-  data() {
-    return {
-      isDirty: false,
-    };
-  },
   computed: {
     ...mapState([
       'targetCountries',
       'banner',
       'consentByScroll',
       'perPurposeConsent',
+      'gdpr',
+      'ccpa',
+      'isDirty',
     ]),
     isEuWorld() {
       return this.targetCountries === 'world' || this.targetCountries === 'EU';
@@ -59,6 +62,33 @@ export default {
       }
 
       return '';
+    },
+    countryOptions() {
+      return [
+        { text: 'Worldwide', checked: this.targetCountries === 'world', value: 'world' },
+        { text: 'US users only', checked: this.targetCountries === 'US', value: 'US' },
+        { text: 'EU users only', checked: this.targetCountries === 'EU', value: 'EU' },
+      ];
+    },
+    legislationOptions() {
+      return [
+        { text: 'GDPR', checked: this.gdpr, value: 'gdpr' },
+        { text: 'CCPA', checked: this.ccpa, value: 'ccpa' },
+      ];
+    },
+    consentOptions() {
+      return [
+        { text: 'Consent by scroll', value: 'consentByScroll', checked: this.consentByScroll },
+        { text: 'Per purpose consent', value: 'perPurposeConsent', checked: this.perPurposeConsent },
+      ];
+    },
+    buttonsOptions() {
+      return [
+        { text: 'Accept Button Display', value: 'acceptButtonDisplay', checked: this.banner.acceptButtonDisplay },
+        { text: 'Reject Button Display', value: 'rejectButtonDisplay', checked: this.banner.rejectButtonDisplay },
+        { text: 'Close Button Display', value: 'closeButtonDisplay', checked: this.banner.closeButtonDisplay },
+        { text: 'Close Button Rejects', value: 'closeButtonRejects', checked: this.banner.closeButtonRejects },
+      ];
     },
   },
   methods: {

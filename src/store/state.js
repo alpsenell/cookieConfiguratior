@@ -11,4 +11,5 @@ export default {
     closeButtonRejects: false, // clicking the Close button should accept (`false`) or reject (`true`) the consent
     title: 'Notice', // Text field that will change the displayed title of the banner
   },
+  isDirty: false,
 };

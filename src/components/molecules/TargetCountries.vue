@@ -27,24 +27,15 @@ export default {
     BaseRadioButton,
     BaseHeader,
   },
-  data() {
-    return {
-      countryOptions: [
-        { text: 'Worldwide', checked: false, value: 'world' },
-        { text: 'US users only', checked: false, value: 'US' },
-        { text: 'EU users only', checked: true, value: 'EU' },
-      ],
-    };
+  props: {
+    countryOptions: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     setCountryOption(option) {
-      this.countryOptions.forEach((item) => {
-        item.checked = false;
-      });
-
-      option.checked = true;
-
-      this.$emit('targetCountry', option.value);
+      this.$emit('setTargetCountry', option.value);
     },
   },
 };

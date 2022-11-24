@@ -6,7 +6,7 @@
       title="Consent"
     />
     <BaseToggleSwitch
-      v-for="option in legislationOptions"
+      v-for="option in consentOptions"
       :key="option.text"
       class="mt-1"
       :checked="option.checked"
@@ -28,16 +28,15 @@ export default {
     BaseHeader,
     BaseToggleSwitch,
   },
-  data() {
-    return {
-      legislationOptions: [{ text: 'Consent by scroll', value: 'consentByScroll', checked: false }, { text: 'Per purpose consent', value: 'perPurposeConsent', checked: false }],
-    };
+  props: {
+    consentOptions: {
+      type: Array,
+      required: true,
+    },
   },
   methods: {
     toggleConsent(option) {
-      option.checked = !option.checked;
-
-      this.$emit('consent', { key: option.value, value: option.checked });
+      this.$emit('setConsentOption', { key: option.value, value: !option.checked });
     },
   },
 };

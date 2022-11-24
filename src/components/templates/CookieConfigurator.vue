@@ -9,17 +9,22 @@
     <div class="cookie-configurator__content grid">
       <div class="flex flex-col gap-8 border-r-2 pr-8">
         <TargetCountries
-          @targetCountry="value => $emit('targetCountry', value)"
+          :country-options="countryOptions"
+          @setTargetCountry="value => $emit('setTargetCountry', value)"
         />
         <Legislation
-          @legislation="value => $emit('legislation', value)"
+          :legislation-options="legislationOptions"
+          @setLegislationOption="value => $emit('setLegislationOption', value)"
         />
         <Consent
-          @consent="value => $emit('consent', value)"
+          :consent-options="consentOptions"
+          @setConsentOption="value => $emit('setConsentOption', value)"
         />
         <BannerConfiguration
-          @bannerConfig="value => $emit('bannerConfig', value)"
-          @updateTitle="value => $emit('updateTitle', value)"
+          :buttons-options="buttonsOptions"
+          :cookie-title="cookieTitle"
+          @setButtonOption="value => $emit('setButtonOption', value)"
+          @setTitle="value => $emit('setTitle', value)"
         />
       </div>
       <div class="pl-8">
@@ -40,8 +45,14 @@
       <a>Read the documentation</a>
       <div>
         <BaseButton
-          :disabled="!isDirty"
+          class="mr-3"
           dark
+          text="Reset"
+          @click.native="$emit('reset')"
+        />
+        <BaseButton
+          dark
+          :disabled="!isDirty"
           text="Save"
         />
       </div>
@@ -71,6 +82,22 @@ export default {
     TargetCountries,
   },
   props: {
+    countryOptions: {
+      type: Array,
+      required: true,
+    },
+    buttonsOptions: {
+      type: Array,
+      required: true,
+    },
+    legislationOptions: {
+      type: Array,
+      required: true,
+    },
+    consentOptions: {
+      type: Array,
+      required: true,
+    },
     targetCountries: {
       type: String,
       required: true,

@@ -21,7 +21,7 @@
     </div>
     <span
       v-if="closeButtonStatus"
-      class="absolute top-3 right-6 text-white"
+      class="absolute top-3 right-6 text-white cursor-pointer"
     >X</span>
   </div>
 </template>
