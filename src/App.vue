@@ -12,6 +12,9 @@ export default {
   components: {
     CookieConfigurator,
   },
+  beforeCreate() {
+    document.title = 'Cookie Configurator';
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loader v-if="loading"></Loader>
+    <Loader v-if="loading" />
     <div class="cookie-configurator grid m-10">
       <div class="cookie-configurator__header">
         <BaseHeader
