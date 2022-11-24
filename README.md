@@ -1,29 +1,30 @@
-# challenge
+# Cookie configurator
+### Bundle build is under the `dist/` directory.
 
-## Project setup
+#### Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+#### Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Run your unit tests
+#### For running tests
 ```
 npm run test:unit
 ```
 
-### Lints and fixes files
+#### For linting;
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### This project built based on Atomic Design Principles
+See [Reference](https://bradfrost.com/blog/post/atomic-web-design/).
