@@ -14,7 +14,7 @@
     <div>
       <span class="mr-2">Title</span>
       <input
-        class="mt-2 bg-transparent border-b border-black outline-0"
+        class="a mt-2 bg-transparent border-b border-black outline-0"
         :value="cookieTitle"
         type="text"
         @input="updateTitle"
