@@ -11,12 +11,14 @@
     :consent-options="consentOptions"
     :buttons-options="buttonsOptions"
     :is-dirty="isDirty"
+    :loading="loading"
     @setTargetCountry="setTargetCountry"
     @setLegislationOption="setLegislation"
     @setButtonOption="setBannerConfig"
     @setTitle="setBannerConfig"
     @setConsentOption="setConsent"
     @reset="reset"
+    @save="saveFormData"
   />
 </template>
 
@@ -27,6 +29,11 @@ import CookieConfigurator from '@/components/templates/CookieConfigurator';
 export default {
   components: {
     CookieConfigurator,
+  },
+  data() {
+    return {
+      loading: false,
+    };
   },
   computed: {
     ...mapState([
@@ -99,6 +106,28 @@ export default {
       'setConsent',
       'reset',
     ]),
+    saveFormData() {
+      this.loading = true;
+
+      const data = {
+        targetCountries: this.targetCountries,
+        gdpr: this.gdpr,
+        ccpa: this.ccpa,
+        perPurposeConsent: this.perPurposeConsent,
+        consentByScroll: this.consentByScroll,
+        banner: this.banner,
+      };
+      const xhr = new XMLHttpRequest();
+
+      setTimeout(() => {
+        xhr.open('POST', 'https://httpbin.org/post', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(data));
+
+        this.loading = false;
+        this.$toast.success('Data saved successfully');
+      }, 1000);
+    },
   },
 };
 </script>

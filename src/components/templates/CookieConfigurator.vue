@@ -1,66 +1,71 @@
 <template>
-  <div class="cookie-configurator grid m-10">
-    <div class="cookie-configurator__header">
-      <BaseHeader
-        class="text-2xl"
-        title="Configure your Cookie Solution"
-      />
-    </div>
-    <div class="cookie-configurator__content grid">
-      <div class="flex flex-col gap-8 border-r-2 pr-8">
-        <TargetCountries
-          :country-options="countryOptions"
-          @setTargetCountry="value => $emit('setTargetCountry', value)"
-        />
-        <Legislation
-          :legislation-options="legislationOptions"
-          @setLegislationOption="value => $emit('setLegislationOption', value)"
-        />
-        <Consent
-          :consent-options="consentOptions"
-          @setConsentOption="value => $emit('setConsentOption', value)"
-        />
-        <BannerConfiguration
-          :buttons-options="buttonsOptions"
-          :cookie-title="cookieTitle"
-          @setButtonOption="value => $emit('setButtonOption', value)"
-          @setTitle="value => $emit('setTitle', value)"
+  <div>
+    <Loader v-if="loading"></Loader>
+    <div class="cookie-configurator grid m-10">
+      <div class="cookie-configurator__header">
+        <BaseHeader
+          class="text-2xl"
+          title="Configure your Cookie Solution"
         />
       </div>
-      <div class="pl-8">
-        <CookieOutput
-          :accept-button-status="acceptButtonStatus"
-          :reject-button-status="rejectButtonStatus"
-          :close-button-status="closeButtonStatus"
-          :title="cookieTitle"
-        />
-        <Message
-          v-if="warningMessage"
-          class="mt-4"
-          :message="warningMessage"
-        />
+      <div class="cookie-configurator__content grid">
+        <div class="flex flex-col gap-8 border-r-2 pr-8">
+          <TargetCountries
+            :country-options="countryOptions"
+            @setTargetCountry="value => $emit('setTargetCountry', value)"
+          />
+          <Legislation
+            :legislation-options="legislationOptions"
+            @setLegislationOption="value => $emit('setLegislationOption', value)"
+          />
+          <Consent
+            :consent-options="consentOptions"
+            @setConsentOption="value => $emit('setConsentOption', value)"
+          />
+          <BannerConfiguration
+            :buttons-options="buttonsOptions"
+            :cookie-title="cookieTitle"
+            @setButtonOption="value => $emit('setButtonOption', value)"
+            @setTitle="value => $emit('setTitle', value)"
+          />
+        </div>
+        <div class="pl-8">
+          <CookieOutput
+            :accept-button-status="acceptButtonStatus"
+            :reject-button-status="rejectButtonStatus"
+            :close-button-status="closeButtonStatus"
+            :title="cookieTitle"
+          />
+          <Message
+            v-if="warningMessage"
+            class="mt-4"
+            :message="warningMessage"
+          />
+        </div>
       </div>
-    </div>
-    <div class="flex justify-between items-center">
-      <a>Read the documentation</a>
-      <div>
-        <BaseButton
-          class="mr-3"
-          dark
-          text="Reset"
-          @click.native="$emit('reset')"
-        />
-        <BaseButton
-          dark
-          :disabled="!isDirty"
-          text="Save"
-        />
+      <div class="flex justify-between items-center">
+        <a>Read the documentation</a>
+        <div>
+          <BaseButton
+            class="mr-3"
+            dark
+            text="Reset"
+            @click.native="$emit('reset')"
+          />
+          <BaseButton
+            dark
+            :disabled="!isDirty"
+            text="Save"
+            @click.native="$emit('save')"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Loader from '@/components/atoms/Loader';
 import BaseHeader from '@/components/atoms/BaseHeader';
 import BaseButton from '@/components/atoms/BaseButton';
 import Consent from '@/components/molecules/Consent';
@@ -72,6 +77,7 @@ import Message from '@/components/atoms/Message';
 
 export default {
   components: {
+    Loader,
     BaseButton,
     Message,
     BannerConfiguration,
@@ -123,6 +129,10 @@ export default {
       required: true,
     },
     isDirty: {
+      type: Boolean,
+      required: true,
+    },
+    loading: {
       type: Boolean,
       required: true,
     },
